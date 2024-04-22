@@ -7,7 +7,11 @@ export default async (req, context) => {
     let videoIds = await getArrOfVideos(platlistId)
 
     console.log(videoIds)
+
+    let totalSeconds = await getTotalSeconds(videoIds)
     
+    console.log(totalSeconds)
+
     return new Response("hello")
   }
   
@@ -71,6 +75,58 @@ export default async (req, context) => {
 
     return videoIds
 
-
   }
   
+  /**
+   * This function calls the google api once for every array within the 
+   * videoIds array. After each call, the duration of each video
+   * is taken from the response and parsed. The total seconds for each video 
+   * is then calculated and added to the variable 
+   * totalSeconds which is then returned.
+   * @param { [[]] } videoIds - A 2D array of the ids of the videos in the playlist. No inner array should have more than 50 elements.
+   * @returns {Number} - The total number of seconds in the playlist.
+   */
+  async function getTotalSeconds(videoIds){
+
+    const apiKey = Netlify.env.get("YOUTUBE_API_KEY")
+    let totalSeconds = 0
+
+    for(let i = 0; i < videoIds.length; i++){
+
+        await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoIds[i].join(',')}&part=contentDetails&key=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+
+            const videos = data.items
+
+            for(let j = 0; j < videos.length; j++){
+
+                let timeStr = videos[j].contentDetails.duration
+
+                let hoursInTimeStr = timeStr.match(/\d+H/)
+                if(hoursInTimeStr){
+                    const hours = Number(hoursInTimeStr[0].replace('H', ''))
+                    totalSeconds += hours * 3600
+                }
+                let minutesInTimeStr = timeStr.match(/\d+M/)
+                if(minutesInTimeStr){
+                    const minutes = Number(minutesInTimeStr[0].replace('M', ''))
+                    totalSeconds += minutes * 60
+                }
+                let secondsInTimeStr = timeStr.match(/\d+S/)
+                if(secondsInTimeStr){
+                    const seconds = Number(secondsInTimeStr[0].replace('S', ''))
+                    totalSeconds += seconds
+                }
+
+            }   
+        })
+        .catch(err => {
+            console.log(`error ${err}`)
+        })
+
+
+    }
+
+    return totalSeconds
+  }
