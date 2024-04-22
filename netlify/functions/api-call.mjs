@@ -1,3 +1,7 @@
+/**
+ * Returns a response that contains the total 
+ * number of seconds in the playlist.
+ */
 export default async (req, context) => {
 
     console.log("Netlify Function called at " + new Date())
@@ -6,13 +10,14 @@ export default async (req, context) => {
 
     let videoIds = await getArrOfVideos(platlistId)
 
-    console.log(videoIds)
-
     let totalSeconds = await getTotalSeconds(videoIds)
     
-    console.log(totalSeconds)
 
-    return new Response("hello")
+    const response = {
+        totalSeconds: totalSeconds
+    }
+
+    return new Response(JSON.stringify(response))
   }
   
 

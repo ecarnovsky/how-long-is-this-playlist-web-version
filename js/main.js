@@ -5,7 +5,7 @@ function getPlaylistTime(){
 
 
     fetch('/.netlify/functions/api-call')
-    .then( res => res.text())
+    .then( res => res.json())
     .then(data => {
         console.log(data)
     })
