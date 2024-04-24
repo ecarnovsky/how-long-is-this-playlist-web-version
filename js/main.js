@@ -1,18 +1,26 @@
 document.querySelector('#playlist-url-sumbit-btn').addEventListener('click', getPlaylistTime)
 
 
-function getPlaylistTime(){
+async function getPlaylistTime(){
+
+    const seconds = await getSeconds()
+
+    let playlistTime = new PlaylistTime(seconds)
+
+    document.querySelector('#time-display-span').innerHTML = playlistTime.getTimeString()
 
 
-    fetch('/.netlify/functions/api-call')
+}
+
+function getSeconds(){
+    return fetch('/.netlify/functions/api-call')
     .then( res => res.json())
     .then(data => {
         console.log(data)
+        return data.totalSeconds
     })
     .catch(err => {
         console.log(`error ${err}`)
     })
-
-
 }
 
