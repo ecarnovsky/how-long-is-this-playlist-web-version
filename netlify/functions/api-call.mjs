@@ -6,9 +6,9 @@ export default async (req, context) => {
 
     console.log("Netlify Function called at " + new Date())
 
-    const platlistId = "PLvSnSObVMQdIlhVIwBcnPMfijIa_7DCl0"
+    const playlistId = new URL(req.url).searchParams.get('id') 
 
-    let videoIds = await getArrOfVideos(platlistId)
+    let videoIds = await getArrOfVideos(playlistId)
 
     let totalSeconds = await getTotalSeconds(videoIds)
     
@@ -25,16 +25,16 @@ export default async (req, context) => {
   /**
    * This function sends a api request to google
    * to get the ids of the videos in a playlist.
-   * @param {Number} platlistId - The id of the playlist
+   * @param {Number} playlistId - The id of the playlist
    * @returns A 2D array of playlist ids. Each inner array holds a max of 50 ids.
    */
-  async function getArrOfVideos(platlistId){
+  async function getArrOfVideos(playlistId){
 
     let videoIds = []
 
     const apiKey = Netlify.env.get("YOUTUBE_API_KEY")
 
-    const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${platlistId}&key=${apiKey}&part=contentDetails&maxResults=50`
+    const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}&key=${apiKey}&part=contentDetails&maxResults=50`
 
     let numVideosInPlaylist = 5001
     let nextPageToken = ""

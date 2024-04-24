@@ -3,17 +3,20 @@ document.querySelector('#playlist-url-sumbit-btn').addEventListener('click', get
 
 async function getPlaylistTime(){
 
-    const seconds = await getSeconds()
+    const url = document.querySelector('#playlist-url-input').value
+    const playlistId = url.split('list=')[1]
 
-    let playlistTime = new PlaylistTime(seconds)
+    const seconds = await getSeconds(playlistId)
+
+    const playlistTime = new PlaylistTime(seconds)
 
     document.querySelector('#time-display-span').innerHTML = playlistTime.getTimeString()
 
 
 }
 
-function getSeconds(){
-    return fetch('/.netlify/functions/api-call')
+function getSeconds(playlistId){
+    return fetch(`/.netlify/functions/api-call?id=${playlistId}`)
     .then( res => res.json())
     .then(data => {
         console.log(data)
