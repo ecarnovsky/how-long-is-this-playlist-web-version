@@ -46,6 +46,12 @@ main aside > * {
   display: block;
   padding-bottom: 15px;
 }
+main aside a {
+  color: rgb(22, 22, 22);
+}
+main aside a:hover {
+  color: rgb(53, 52, 52);
+}
 
 button {
   color: white;
@@ -66,7 +72,9 @@ button:hover {
 input {
   background: rgb(221, 220, 220);
   border: rgb(49, 49, 49) 1px solid;
+  margin-top: 18px;
   padding: 8px 15px;
+  width: 520px;
 }
 
 /*# sourceMappingURL=style.css.map */
