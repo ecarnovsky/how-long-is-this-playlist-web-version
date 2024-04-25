@@ -22,7 +22,7 @@ main{
     border-radius: 3%;
     background: radial-gradient(rgba(119, 136, 153,.6), rgba(101, 112, 122, .6));
     border: 7px $primaryBorderColor solid;
-
+    margin-top: 20px;
 
     > * {
         padding-top: 50px;
