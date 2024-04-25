@@ -49,10 +49,11 @@ main h2 {
 main aside {
   padding-top: 200px;
   font-size: 2rem;
+  padding-bottom: 15px;
 }
 main aside > * {
   display: block;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 main aside a {
   color: rgb(22, 22, 22);
@@ -115,6 +116,9 @@ input {
 @media (max-width: 580px) {
   input {
     width: auto;
+  }
+  main > aside {
+    padding-top: 100px;
   }
 }
 
