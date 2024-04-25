@@ -4,6 +4,8 @@ document.querySelector('#playlist-url-sumbit-btn').addEventListener('click', get
 
 async function getPlaylistTime(){
 
+    document.querySelector('#time-display-span').innerHTML = `<div class="loader"></div>`
+
     const url = document.querySelector('#playlist-url-input').value
     const playlistId = url.split('list=')[1]
 
