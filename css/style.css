@@ -12,7 +12,6 @@ html {
 main {
   font-family: sans-serif;
   font-size: 3rem;
-  font-weight: 500;
   max-width: 800px;
   background: rgb(39, 41, 40);
   margin: auto;
@@ -40,9 +39,11 @@ main #time-display-span {
 }
 main h1 {
   font-size: 3rem;
+  font-weight: 400;
 }
 main h2 {
   font-size: 4rem;
+  font-weight: 400;
 }
 main aside {
   padding-top: 200px;
