@@ -1,13 +1,21 @@
 document.querySelector('#playlist-url-sumbit-btn').addEventListener('click', getPlaylistTime)
+document.querySelector('#playlist-url-input').addEventListener("focus", removeErrorSignal)
 
 // document.querySelector('#playlist-url-input').focus()
 
 async function getPlaylistTime(){
 
-    document.querySelector('#time-display-span').innerHTML = `<div class="loader"></div>`
-
     const url = document.querySelector('#playlist-url-input').value
     const playlistId = url.split('list=')[1]
+
+    if(playlistId == undefined){
+        document.querySelector('#playlist-url-input').classList.add('input-error')
+        console.log("Invalid url.")
+        return
+    }
+
+    document.querySelector('#time-display-span').innerHTML = `<div class="loader"></div>`
+
 
     const seconds = await getSeconds(playlistId)
 
@@ -30,3 +38,8 @@ function getSeconds(playlistId){
     })
 }
 
+
+function removeErrorSignal(){
+    document.querySelector('#playlist-url-input').classList.remove('input-error')
+
+}

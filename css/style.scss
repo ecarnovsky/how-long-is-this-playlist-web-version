@@ -89,6 +89,11 @@ input {
     color: #747373;
 }
 
+.input-error{
+    border: rgb(209, 43, 43) 1px solid;
+    box-shadow: 0 0 10px rgba(255, 76, 76, 0.5);
+}
+
 .loader {
     border: 7px solid #f3f3f3;
     border-top: 7px solid #5fa1d1; 
