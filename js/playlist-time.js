@@ -23,6 +23,6 @@ class PlaylistTime{
 
         let numberOfMinutes = Math.round((this._secondsInPlaylist  - (numberOfHours * SECONDS_IN_HOUR)) / SECONDS_IN_MINUTE)
 
-        return `${numberOfHours} hours and ${numberOfMinutes} minutes`
+        return `${numberOfHours > 0? (numberOfHours === 1?  `${numberOfHours} hour and` : `${numberOfHours} hours and`) : '' } ${numberOfMinutes} minute${numberOfMinutes === 1 ? '' : 's' }`
     }
 }

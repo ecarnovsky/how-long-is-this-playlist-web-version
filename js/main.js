@@ -1,5 +1,6 @@
 document.querySelector('#playlist-url-sumbit-btn').addEventListener('click', getPlaylistTime)
 
+// document.querySelector('#playlist-url-input').focus()
 
 async function getPlaylistTime(){
 
